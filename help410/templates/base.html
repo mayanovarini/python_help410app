@@ -30,6 +30,9 @@
               </div>
             </div>
           </form>
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'about' %}" style="margin: .6em 0 1em 0; font-size: 15px">About Us</a>
+          </div>
           <ul class="nav navbar-nav navbar-right">
             {% if user and not user.is_anonymous %}
               <li class="dropdown">

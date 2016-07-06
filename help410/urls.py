@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^sales/$', views.sales, name='sales'),
     url(r'^category/(?P<link>[\w|-]+)/$', views.category, name='category'),
     url(r'^search/$', views.search, name='search'),
+    url(r'^about/$', views.about, name='about'),
 
 
 ]

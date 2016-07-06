@@ -34,7 +34,7 @@ def gig_detail(request, id):
         Purchase.objects.filter(gig=gig, buyer=request.user).count() == 0 or \
         Review.objects.filter(gig=gig, user=request.user).count() > 0:
         show_post_review = False
-        
+
     else:
         show_post_review = Purchase.objects.filter(gig=gig, buyer=request.user).count() > 0
 
@@ -142,3 +142,6 @@ def category(request, link):
 def search(request):
     gigs = Gig.objects.filter(title__contains=request.GET['title'])
     return render(request, 'home.html', {"gigs": gigs})
+
+def about(request):
+    return render(request, 'about.html')
