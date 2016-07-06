@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+  {% if error %}
+    <div class="alert alert-warning arlert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Warning!</strong> {{ error }}
+    </div>
+  {% endif %}
+  <h1 style="margin: 60px 0 30px 0; text-align: center">Post a Chore</h1>
+  <div class="panel panel-default" style="margin-top: 3em">
+    <div class="panel-body">
+      <form class="form-horizontal" method="POST" encType="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Chore Title</label>
+          <div class="col-sm-10">
+            <textarea rows="3" class="form-control" name="title"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Category</label>
+          <div class="col-sm-10">
+            <select name="category" class="form-control">
+              <option value="HC">House Cleaning</option>
+              <option value="CW">Car Wash</option>
+              <option value="LD">Laundry</option>
+              <option value="PD">Pick up & Delivery</option>
+              <option value="GC">Grocery</option>
+              <option value="CK">Cooking</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Description</label>
+          <div class="col-sm-10">
+            <textarea rows="5" class="form-control" name="description"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Price ($)</label>
+          <div class="col-sm-10">
+            <input type="number" lass="form-control" value="10" name="price"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Photo</label>
+          <div class="col-sm-10">
+            <input type="file" class="form-control" name="photo">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Status</label>
+          <div class="col-sm-10">
+            <select name="status" class="form-control">
+              <option value="1">Active</option>
+              <option value="2">Hidden</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">Publish</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

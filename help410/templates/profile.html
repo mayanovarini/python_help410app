@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+
+  {% if request.user == profile.user %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="jumbotron text-center">
+        <h1><b>{{ profile.user.first_name }} {{ profile.user.last_name }}</b></h1>
+        <br/>
+        <input class="form-control" name="slogan" value="{{ profile.slogan }}">
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body" style="text-align: center">
+          <img src="{{ profile.avatar }}" class="img-circle" height="120" width="120">
+            <h3 class="text-uppercase"><b>About {{ profile.user.first_name }} {{ profile.user.last_name }}</b></h3>
+            <hr/>
+            <input class="form-control" name="about" value="{{ profile.about }}">
+            <br/>
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+      </div>
+
+    </form>
+  {% else %}
+    <div class="jumbotron text-center">
+      <h1><b>{{ profile.user.first_name }} {{ profile.user.last_name }}</b></h1>
+      <br/>
+      <p>{{ profile.slogan }}</p>
+    </div>
+    <div class="panel panel-default" style="text-align: center; padding-top: 2em;">
+      <div class="panel-body">
+        <img src="{{ profile.avatar }}" class="img-circle" height="120" width="120">
+          <h3 class="text-uppercase"><b>About {{ profile.user.first_name }} {{ profile.user.last_name }}</b></h3>
+          <hr/>
+          <p>{{ profile.about }}</p>
+      </div>
+    </div>
+  {% endif %}
+
+
+
+  <h3 class="text-uppercase" style="margin-top:50px"><b>{{ profile.user.first_name }} {{ profile.user.last_name }}'s chores</b></h3>
+    <div class="row">
+      {% for gig in gigs %}
+        <div class="col-md-3">
+          <div class="thumbnail">
+            <a href="{% url 'gig_detail' gig.id %}"><img src="/media/{{ gig.photo }}"></a>
+            <div class="caption">
+              <p><a href="{% url 'gig_detail' gig.id %}">{{ gig.title }}</a></p>
+              <p>
+                <span>
+                  <a href="{% url 'profile' gig.user.username %}">{{ gig.user.first_name }} {{ gig.user.last_name }}</a>
+                </span>
+                <b class="green pull-right">${{ gig.price }}</b>
+            </p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+{% endblock%}
